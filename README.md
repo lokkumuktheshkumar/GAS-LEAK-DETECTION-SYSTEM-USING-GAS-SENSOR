@@ -10,13 +10,11 @@
   Gas sensor (MQ-2)
 	
 ## Circuit Diagram:
+<img width="1502" height="1001" alt="Screenshot 2025-09-16 132832" src="https://github.com/user-attachments/assets/243d3787-c671-400b-8bbf-11cac7028b46" />
 
- 
+<img width="1152" height="854" alt="Screenshot 2025-09-16 133112" src="https://github.com/user-attachments/assets/a720be38-79f4-4fca-8d07-94f5820c8503" />
 
-
-
-
-## Theory :
+ ## Theory :
  The Arduino Uno is powered by the ATmega328P, an 8-bit microcontroller that runs at 16 MHz. It has 32 KB of flash memory, 2 KB of SRAM, and 1 KB of EEPROM. The board 
 has 14 digital I/O pins (of which 6 can be used as PWM outputs) and 6 analog input pins. These pins allow the board to interface with various sensors, actuators, and other devices.
 The Arduino Uno can be powered via a USB connection or an external power supply. The board has a built-in voltage regulator to manage power from 7 to 12 volts.
@@ -57,10 +55,56 @@ Step 7: Save Your Work
 •	Save the Circuit: Click "Save" to keep your circuit design and code for future use.
 
 ## Program:
+```
+int LED = A1;          //Red LED
+int LED1 = A3;         //Green LED
+int gas_pin = A0;       // For Gas Sensor
+int buzzer_pin = A2;   // For Buzzer
+
+
+
+void setup() 
+{
+  Serial.begin(9600);
+  pinMode (buzzer_pin, OUTPUT);
+  pinMode (gas_pin, INPUT);
+}
+
+void loop() {
+  	float sensorValue,gas_pin;
+	sensorValue = analogRead(gas_pin); // read analog input pin 0
+
+
+  if(sensorValue >= 300)
+  {  
+    digitalWrite(LED,HIGH);
+    digitalWrite(LED1,LOW);
+
+    digitalWrite (buzzer_pin, HIGH);
+    //Serial.println();
+    Serial.print(sensorValue);
+    Serial.println(" |SMOKE DETECTED|");     
+  }
+  
+  else
+  {
+  	digitalWrite(LED,LOW);
+    digitalWrite(LED1,HIGH);
+    
+    digitalWrite (buzzer_pin, LOW);
+    Serial.println();
+    Serial.println("Sensor Value: ");
+    Serial.print(sensorValue);
+    //Serial.print(" |Safe Mode|");
+  } 
+ 
+  delay(1000);
+
+}
+```
 
 ## Output:
-
-   
-
+https://github.com/user-attachments/assets/f75914ff-e8fa-4c71-90c9-e646a02b5e6f
 ## Result:
+Thus the air quality using Gas Sensor  MQ-2 with Arduino UNO Board/ESP-32 using Tinker CAD is verified.
 
